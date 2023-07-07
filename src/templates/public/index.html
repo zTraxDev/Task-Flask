@@ -1,0 +1,31 @@
+{% extends 'header.html' %}
+
+{% block title%}{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages()%}
+ {% if messages %}
+  {% for msg in messages%}
+  <div class="alert alert-dismissible alert-warning" id="alerta">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    {{msg}}
+  </div>
+  {% endfor %}
+ {% endif%}
+{% endwith %}
+
+
+<div class="container-sm text-center">
+  <br>
+  <h1 id="h1d">Bienvenido a Nuestra lista de Tareas</h1>
+  <p class="lead" id="p2d">Podras publicar tus tareas diarias y llevar un registro de ellas para llevarlas acabo en tu dia a dia.</p>
+  <hr class="my-4">
+  <div class="d-flex justify-content-center">
+    <a href="{{url_for('L.login')}}" class="btn btn-dark mx-2">Iniciar Sesion</a>
+    <a href="{{url_for('L.register')}}" class="btn btn-dark mx-2">Registrar</a>
+   </div>
+   <br>
+   <p id="p3d">¿No tienes una cuenta?</p>
+</div>
+{%endblock%}

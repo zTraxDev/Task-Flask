@@ -1,0 +1,46 @@
+{% extends 'header.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages()%}
+ {% if messages %}
+  {% for msg in messages%}
+  <div class="alert alert-dismissible alert-warning" id="alerta">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    {{msg}}
+  </div>
+  {% endfor %}
+ {% endif%}
+{% endwith %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-sm-8">
+            <div class="card border-dark">
+                <div class="card-header">
+                    <h1 class="text-center">{% block title%}Iniciar Sesion{% endblock %}</h1>
+                </div>
+                <div class="card-body">
+                    <form action="/login" method="POST" id="form" onsubmit="validar()">
+                        <div class="form-group" id="form_class">
+                            <label for="txtUser">Correo Electronico</label>
+                            <input type="email" class="form-control" name="txtUse" id="txtUse" placeholder="Ingresa tu Correo" required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" id="pass" name="tpassword" placeholder="Ingresa tu contraseña" required>
+                        </div>
+                        <br>
+                        <div class="text-center">
+                          <button type="submit" class="form-control btn btn-success">Iniciar Sesion</button>
+                        </div>
+                        <div class="mb-1 form-contro">
+                            <span>¿No tienes cuenta? <a href="{{url_for('L.register')}}">Crea una!</a></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -1,0 +1,19 @@
+{% include 'header.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+
+<div class="container-sm text-center">
+    <br>
+    <h1 id="h1d">Bienvenido a tu lista de tareas {{g.user.username}} </h1>
+    <p class="lead" id="p2d">Aca podras crear tus tareas y revisarlas en cualquier momento del dia.</p>
+    <hr class="my-4">
+    <div class="d-flex justify-content-center">
+     </div>
+     <p id="p3d">¿No tienes tareas?</p>
+     <a href="{{url_for('Task.task', id = g.user.id)}}" class="btn btn-dark mx-2">Tareas</a>
+  </div>
+
+{% endblock %}

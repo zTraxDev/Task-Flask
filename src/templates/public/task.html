@@ -1,0 +1,52 @@
+{% include 'header.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages()%}
+ {% if messages %}
+  {% for msg in messages%}
+  <div class="alert alert-dismissible alert-warning" id="alerta">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    {{msg}}
+  </div>
+  {% endfor %}
+ {% endif%}
+{% endwith %}
+
+<div class="row-fluid">
+    <section class="container-fluid">
+        <nav class="navbar">
+            <h3 class="text-start">{% block title %} Lista de Tareas{% endblock %}</h3>
+            <a href="{{url_for('Task.create_task')}}" class="btn btn-success">Nueva</a>
+        </nav>
+    
+        <!-- Table -->
+        <table class="table table-bordered table-dark">
+            <thead>
+              <tr>
+                <th class="text-center">Tarea</th>
+                <th class="text-center">Descripcion</th>
+                <th class="text-center">Estado</th>
+                <th class="text-center">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for task_ in task_ | reverse%}
+                {% if g.user.id == task_.create_by %}
+                <tr> <!-- Inicia una nueva fila para cada tarea -->
+                  <td class="text-center">{{task_.title}}</td>
+                  <td class="text-center">{{task_.description}}</td>
+                  <td class="text-center">{{task_.state}}</td>
+                  <td class="text-center">
+                    <a class="btn btn-success btn-sm" href="{{url_for('Task.update', id = task_.id)}}">Editar</a>
+                    <a class="btn btn-info btn-sm" href="{{url_for('Task.delete', id = task_.id)}}">Borrar</a>
+                  </td>
+                </tr> <!-- Cierra la fila -->
+                {% endif %}
+                {% endfor %}
+              </tbody>
+          </table>
+    </section>
+</div>
+
+{% endblock %}

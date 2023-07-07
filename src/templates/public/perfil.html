@@ -1,0 +1,66 @@
+{% include 'header.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages()%}
+ {% if messages %}
+  {% for msg in messages%}
+  <div class="alert alert-dismissible alert-warning" id="alerta">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    {{msg}}
+  </div>
+  {% endfor %}
+ {% endif%}
+{% endwith %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+
+        </div>
+        <div class="col-md-5 ">
+            <br>
+          <div class="card border-dark mb-3">
+            <div class="card-header">
+              <div class="mb text-center text-activate">
+                {% block title %} Perfil {% endblock %}
+              </div>
+            </div>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <h4 class="card-title">Usuario</h4>
+                  <div>
+                    <a href="{{url_for('Perfil.change_username', id = g.user.id)}}" class="btn edit-button btn-secondary">Editar</a>
+                  </div>
+                </div>
+                <p class="card-text">{{ g.user.username }}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">Correo Electronico</h4>
+                    <div>
+                      <a href="{{url_for('Perfil.change_email', id = g.user.id)}}" class="btn edit-button btn-secondary">Editar</a>
+                    </div>
+                  </div>
+                  <p class="card-text text-body-secondary">{{ g.user.email }}</p>
+
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h4 class="card-title">Contraseña</h4>
+                    <div>
+                      <a href="{{url_for('Perfil.change_password', id = g.user.id)}}" class="btn edit-button btn-secondary">Editar</a>
+                    </div>
+                  </div>
+                  <p class="card-text">**********</p>
+                <!-- Resto del código omitido por simplicidad -->
+                <br>
+              </div>
+
+        <div class="col-md-4">
+            
+        </div>
+        <div class="col-md-4">
+            
+        </div>
+        
+    </div>
+   </div>
+{% endblock %}
